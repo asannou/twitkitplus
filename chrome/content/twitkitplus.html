@@ -193,22 +193,10 @@
 					<div id="loginwrap">
 						<div id="loginform"><div>
 							<h1 id="login-header">Please Sign In</h1>
-							<form action="#" 
-								onsubmit="try { 
-												var btn=$('loginbutton'); 
-												btn.value='Signing in...'; 
-												Tweetbar.sign_in($('username').value,
-																$('password').value,
-																function() {btn.value='Sign In';}); 
-											} catch(e) {};
-											return false;">
-								<label id="username-label" for="username">username or email:</label>
-								<input class="textbox" type="text" name="username" id="username" size="10" />
-								<label id="password-label" for="password">password:</label>
-								<input class="textbox" type="password" name="password" id="password" size="10" />
-								<input class="piton" type="submit" name="loginbutton" id="loginbutton" value="Sign In!" />
+							<form action="#">
+								<input class="piton" type="submit" name="loginbutton" id="loginbutton" value="Sign In!" onclick="Tweetbar.authenticate_tobasic(); return false;"/>
 							</form>
-							<h3 id="signup">or <a href="http://twitter.com/account/create?tb_10" target="_content">sign up now</a>!</h3>
+							<h3 id="signup">or <a href="https://twitter.com/signup" target="_content">sign up now</a>!</h3>
 <!--
 							<h3 id="signup">or <br>[ Login by OAuth ]<br>
 							<a href="#" onclick="consumer.initializeForm(document.oauth_request

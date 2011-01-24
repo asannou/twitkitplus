@@ -13,3 +13,6 @@ locale twitkitplus he	chrome/locale/he/
 locale twitkitplus it	chrome/locale/it/
 locale twitkitplus ja	chrome/locale/ja/
 locale twitkitplus ru	chrome/locale/ru/
+
+component {AE96AE22-F716-447b-A703-5AE45AA18034} components/twitkitplus.js
+contract @mozilla.org/network/protocol;1?name=twitkitplus {AE96AE22-F716-447b-A703-5AE45AA18034}

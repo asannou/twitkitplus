@@ -176,8 +176,6 @@ var Tweetbar = {
 		function () {
 			$('.signin').innerHTML = this._('login.signIn');
 			$('login-header').innerHTML = this._('login.header');
-			$('username-label').innerHTML = this._('login.form.username');
-			$('password-label').innerHTML = this._('login.form.password');
 			$('loginbutton').setProperty('value', this._('login.form.submit'));
 			$('signup').innerHTML = this._('login.signUp', '<a href="' + Tweetbar.protocol + '://twitter.com/account/create?tb_10" target="_content">', '</a>');
 			$('question').innerHTML = this._('poster.question');
@@ -308,11 +306,11 @@ var Tweetbar = {
 		    }else{
 		        addcount = 'count=20';
 		    }
-			return Tweetbar.protocol + '://twitter.com/statuses/' + resource + '.json' + addparam + addcount;
+			return Tweetbar.protocol + '://twitter-basicauth.appspot.com/statuses/' + resource + '.json' + addparam + addcount;
 		},
 	api_url_for_nonstatuses:
 		function (resource,param) {
-			return Tweetbar.protocol + '://twitter.com/' + resource + '.json'+ param;
+			return Tweetbar.protocol + '://twitter-basicauth.appspot.com/' + resource + '.json'+ param;
 		},
 	api2_url_for_statuses:
 		function (resource,param,status) {
@@ -326,7 +324,7 @@ var Tweetbar = {
 		    }else{
 		    	addstatus = status;
 		    }
-			return Tweetbar.protocol + '://api.twitter.com/1/' + addstatus + '/' + resource + '.json'+ addparam;
+			return Tweetbar.protocol + '://twitter-basicauth.appspot.com/1/' + addstatus + '/' + resource + '.json'+ addparam;
 		},
 	api_url_for_search:
 		function (resource,param) {
@@ -335,7 +333,7 @@ var Tweetbar = {
 
 //	api_url_for_more_statuses:
 //		function (resource) {
-//			return Tweetbar.protocol + '://twitter.com/statuses/home_timeline.json?max_id=' + resource;
+//			return Tweetbar.protocol + '://twitter-basicauth.appspot.com/statuses/home_timeline.json?max_id=' + resource;
 //		},
 	/**
 	 * Make links and replies clickable.
@@ -388,13 +386,13 @@ var Tweetbar = {
 	create_status_object:
 		function (obj) {
 			return {
-				'id': parseInt(obj.id),
+				'id': obj.id_str,
 				'text': Tweetbar.expand_status(obj.text),
 				'created_at': Date.parse(obj.created_at || Date()),
 				'source': obj.source,
 				'favorited': obj.favorited,
 				'truncated': obj.truncated,
-				'reply_id': parseInt(obj.in_reply_to_status_id)
+				'reply_id': obj.in_reply_to_status_id_str
 			}
 		},
 	/**
@@ -409,7 +407,7 @@ var Tweetbar = {
 	create_user_object:
 		function (obj) {
 			return {
-				'id': parseInt(obj.id),
+				'id': obj.id_str,
 				'url': obj.url,
 				'profile_image_url': obj.profile_image_url,
 				'name': obj.name,
@@ -666,7 +664,7 @@ var Tweetbar = {
 
 				( tweet.user.screen_name == Tweetbar.username ) ? dellink = '<a href="#" onclick="Tweetbar.delete_tweet(\'' + tweet.id + '\');"><img style="border: none; float: right;" src="chrome://twitkitplus/skin/images/delete.png" alt="" /></a>' : dellink = '';
 				
-				( this.currentList == 'replies' ) ? date = '' : date = ' - ' + Tweetbar.relative_time_string(tweet.created_at);
+				date = ' - ' + Tweetbar.relative_time_string(tweet.created_at);
 				
 				/*
 				 * Hashtags implementation - by Joschi
@@ -725,7 +723,7 @@ var Tweetbar = {
 
 				link_qt = '<a class="re" href="#" onclick="setNonPublicRT(\''+ tweet.user.screen_name + '\',decodeURI(\'' + encodeURI(link_qt_text) + '\'),\'' + tweet.id + '\'); autofit(this); return false;" onmouseover="$(\'nav-label\').innerHTML = Tweetbar._(\'icon.nonpubQT\');" onmouseout="$(\'nav-label\').innerHTML = \'&nbsp;\';"><img class="re" src="chrome://twitkitplus/skin/images/qt.png" alt="" /></a>';
 				link_qtp = '<a class="re" href="#" onclick="setQT(\''+ tweet.user.screen_name + '\',decodeURI(\'' + encodeURI(link_qt_text) + '\'),\'' + tweet.id + '\'); autofit(this); return false;" onmouseover="$(\'nav-label\').innerHTML = Tweetbar._(\'icon.pubQT\');" onmouseout="$(\'nav-label\').innerHTML = \'&nbsp;\';"><img class="re" src="chrome://twitkitplus/skin/images/qtp.png" alt="" /></a>';
-				link_rt = '<a class="re" href="#" onclick="if(confirm(\'Twitkit\+ : \\n want to retweet?\')){Tweetbar.send_retweet(\'retweet\',' + tweet.id + ');} return false;"><img class="re" src="chrome://twitkitplus/skin/images/rt.png" onmouseover="$(\'nav-label\').innerHTML = Tweetbar._(\'icon.pubRT\');" onmouseout="$(\'nav-label\').innerHTML = \'&nbsp;\';" alt="" /></a>';
+				link_rt = '<a class="re" href="#" onclick="if(confirm(\'Twitkit\+ : \\n want to retweet?\')){Tweetbar.send_retweet(\'retweet\',\'' + tweet.id + '\');} return false;"><img class="re" src="chrome://twitkitplus/skin/images/rt.png" onmouseover="$(\'nav-label\').innerHTML = Tweetbar._(\'icon.pubRT\');" onmouseout="$(\'nav-label\').innerHTML = \'&nbsp;\';" alt="" /></a>';
 
 
 				link_follow = '<a class="re" href="javascript: Tweetbar.follow_user(\'' + tweet.user.screen_name + '\'); void 0;" onmouseover="$(\'nav-label\').innerHTML = \'follow\';" onmouseout="$(\'nav-label\').innerHTML = \'&nbsp;\';"><img class="re" src="chrome://twitkitplus/skin/images/follow.png" /></a>';
@@ -1058,7 +1056,7 @@ var Tweetbar = {
 		 			temp_tweet= { 
 		 				 '_a':                   '' 
 		 				,'_b':                   ''
-		 				,'id':                   parseInt(current_tweets[i].id)
+		 				,'id':                   current_tweets[i].id_str
 		 				,'user':{'profile_image_url': current_tweets[i].profile_image_url
 				 				,'protected':         current_tweets[i].protected
 		 						,'name':              current_tweets[i].from_user
@@ -1077,7 +1075,7 @@ var Tweetbar = {
 			 			temp_tweet= { 
 			 				 '_a':                   '' 
 			 				,'_b':                   ''
-			 				,'id':                   parseInt(current_tweets[i].retweeted_status.id)
+			 				,'id':                   current_tweets[i].retweeted_status.id_str
 			 				,'user':{'profile_image_url': current_tweets[i].retweeted_status.user.profile_image_url
 			 						,'protected':         current_tweets[i].retweeted_status.user.protected
 			 						,'name':              current_tweets[i].retweeted_status.user.name
@@ -1085,8 +1083,8 @@ var Tweetbar = {
 			 				,'created_at':           Date.parse(current_tweets[i].retweeted_status.created_at || Date())
 			 				,'text':                 Tweetbar.expand_status(current_tweets[i].retweeted_status.text)
 			 				,'favorited':            current_tweets[i].retweeted_status.favorited
-			 				,'in_reply_to_status_id':current_tweets[i].retweeted_status.in_reply_to_status_id
-			 				,'in_reply_to_user_id':  parseInt(current_tweets[i].retweeted_status.in_reply_to_user_id)
+			 				,'in_reply_to_status_id':current_tweets[i].retweeted_status.in_reply_to_status_id_str
+			 				,'in_reply_to_user_id':  parseInt(current_tweets[i].retweeted_status.in_reply_to_user_id_str)
 			 				,'reply_id':             ''
 			 				,'source':                   current_tweets[i].retweeted_status.source
 			 				,'rtuser':{'profile_image_url': current_tweets[i].user.profile_image_url
@@ -1099,7 +1097,7 @@ var Tweetbar = {
 			 			temp_tweet= { 
 			 				 '_a':                   '' 
 			 				,'_b':                   ''
-			 				,'id':                   parseInt(current_tweets[i].id)
+			 				,'id':                   current_tweets[i].id_str
 			 				,'user':{'profile_image_url': current_tweets[i].user.profile_image_url
 			 						,'protected':         current_tweets[i].user.protected
 			 						,'name':              current_tweets[i].user.name
@@ -1107,8 +1105,8 @@ var Tweetbar = {
 			 				,'created_at':           Date.parse(current_tweets[i].created_at || Date())
 			 				,'text':                 Tweetbar.expand_status(current_tweets[i].text)
 			 				,'favorited':            current_tweets[i].favorited
-			 				,'in_reply_to_status_id':current_tweets[i].in_reply_to_status_id
-			 				,'in_reply_to_user_id':  parseInt(current_tweets[i].in_reply_to_user_id)
+			 				,'in_reply_to_status_id':current_tweets[i].in_reply_to_status_id_str
+			 				,'in_reply_to_user_id':  parseInt(current_tweets[i].in_reply_to_user_id_str)
 			 				,'reply_id':             ''
 			 				,'source':                   current_tweets[i].source
 		 					,'geo_type':             geo_type
@@ -1150,7 +1148,7 @@ var Tweetbar = {
 	 */
 	update_current_list_friends:
 		function (screen_name,mode,maxid) {
-			( this.currentList == 'friends' ) ? theurl = Tweetbar.protocol + '://twitter.com/statuses/friends/' + this.username + '.json?lite=true' : theurl = Tweetbar.protocol + '://twitter.com/statuses/followers.json?lite=true';
+			( this.currentList == 'friends' ) ? theurl = Tweetbar.protocol + '://twitter-basicauth.appspot.com/statuses/friends/' + this.username + '.json?lite=true' : theurl = Tweetbar.protocol + '://twitter-basicauth.appspot.com/statuses/followers.json?lite=true';
 			var aj = new Ajax( theurl, {
 				headers: Tweetbar.http_headers(),
 				method: 'get',
@@ -1210,7 +1208,7 @@ var Tweetbar = {
 				maxid = '';
 			}
 			if ( this.currentList == 'replies' ) {
-				var aj = new Ajax( Tweetbar.protocol + '://twitter.com/statuses/mentions.json' + maxid, {
+				var aj = new Ajax( Tweetbar.protocol + '://twitter-basicauth.appspot.com/statuses/mentions.json' + maxid, {
 					headers: Tweetbar.http_headers(),
 					method: 'get',
 					postBody: {},
@@ -1239,12 +1237,13 @@ var Tweetbar = {
             					}
 								var li = new Element('li');
 								rsp[i].text = Tweetbar.expand_status(rsp[i].text);
+								rsp[i].created_at = Date.parse(rsp[i].created_at || Date());
 								li.setHTML(Tweetbar.render_tweet(rsp[i]));
 								if ( ( i % 2 ) == 0 ){
 									li.addClass('even');
 								}
 								li.injectInside('tweets');
-                                max_tweet_id = rsp[i].id;
+                                max_tweet_id = rsp[i].id_str;
 							}
 				            var li = new Element('li');
 							li.setHTML(Tweetbar.getMoreStatus(max_tweet_id));
@@ -1276,7 +1275,7 @@ var Tweetbar = {
 				maxid = '';
 			}
 			if ( this.currentList == 'direct_messages' ) {
-				var aj = new Ajax( Tweetbar.protocol + '://twitter.com/direct_messages.json' + maxid, {
+				var aj = new Ajax( Tweetbar.protocol + '://twitter-basicauth.appspot.com/direct_messages.json' + maxid, {
 					headers: Tweetbar.http_headers(),
 					method: 'get',
 					postBody: {},
@@ -1310,7 +1309,7 @@ var Tweetbar = {
 									li.addClass('even');
 								}
 								li.injectInside('tweets');
-                                max_tweet_id = rsp[i].id;
+                                max_tweet_id = rsp[i].id_str;
 							}
 				            var li = new Element('li');
 							li.setHTML(Tweetbar.getMoreStatus(max_tweet_id));
@@ -1344,7 +1343,7 @@ var Tweetbar = {
 			    }
 				var temp_inner = '';
 
-				var aj = new Ajax( Tweetbar.protocol + '://twitter.com/users/show/' + screen_name + '.json', {
+				var aj = new Ajax( Tweetbar.protocol + '://twitter-basicauth.appspot.com/users/show/' + screen_name + '.json', {
 					headers: Tweetbar.http_headers(),
 					method: 'get',
 					postBody: {},
@@ -1378,7 +1377,7 @@ var Tweetbar = {
 								'<strong>' + Tweetbar._('tabs.me.updates') + '</strong>: ' + user.statuses_count + '</div>' +
 								'</div>';
 							tweets.setHTML(inner);
-							var aj2 = new Ajax( Tweetbar.protocol + '://twitter.com/statuses/user_timeline.json?screen_name=' + screen_name , {
+							var aj2 = new Ajax( Tweetbar.protocol + '://twitter-basicauth.appspot.com/statuses/user_timeline.json?screen_name=' + screen_name , {
 								headers: Tweetbar.http_headers(),
 								method: 'get',
 								postBody: {},
@@ -1402,13 +1401,14 @@ var Tweetbar = {
 						    			for ( var i=0; i < rsp.length; i++ ) {
 											var li = new Element('li');
 											rsp[i].text = Tweetbar.expand_status(rsp[i].text);
+											rsp[i].created_at = Date.parse(rsp[i].created_at || Date());
 											li.setHTML(Tweetbar.render_tweet(rsp[i]));
 											//temp_inner += '<li>' + Tweetbar.render_tweet(rsp[i]) + '</li>';
 											if ( ( i % 2 ) == 0 ){
 												li.addClass('even');
 											}
 											li.injectInside($('tweets'));
-						                    max_tweet_id = rsp[i].id;
+						                    max_tweet_id = rsp[i].id_str;
 										}
 									},
         						onFailure:
@@ -1460,7 +1460,7 @@ var Tweetbar = {
 				default:
 					var aj = new Ajax( url, {
 						headers: Tweetbar.http_headers(),
-						method: 'GET',
+						method: 'get',
 						postBody: {},
 						onComplete:
 							function (raw_data) {
@@ -1804,7 +1804,7 @@ var Tweetbar = {
 	 */
 	follow_user:
 		function (username) {
-			var aj = new Ajax( Tweetbar.protocol + '://twitter.com/friendships/create/' + username + '.json', {
+			var aj = new Ajax( Tweetbar.protocol + '://twitter-basicauth.appspot.com/friendships/create/' + username + '.json', {
 				headers: Tweetbar.http_headers(),
 				postBody: {},
 				onSuccess:
@@ -1828,7 +1828,7 @@ var Tweetbar = {
 	unfollow_user:
 		function (username) {
 			if(confirm('wand to unfollow?')){
-				var aj = new Ajax( Tweetbar.protocol + '://twitter.com/friendships/destroy/' + username + '.json', {
+				var aj = new Ajax( Tweetbar.protocol + '://twitter-basicauth.appspot.com/friendships/destroy/' + username + '.json', {
 					headers: Tweetbar.http_headers(),
 					postBody: {},
 					onSuccess:
@@ -1851,7 +1851,7 @@ var Tweetbar = {
 	 */
 	fav_tweet:
 		function (tweetid) {
-			var aj = new Ajax( Tweetbar.protocol + '://twitter.com/favorites/create/' + tweetid + '.json', {
+			var aj = new Ajax( Tweetbar.protocol + '://twitter-basicauth.appspot.com/favorites/create/' + tweetid + '.json', {
 				headers: Tweetbar.http_headers(),
 				postBody: {},
 				onSuccess:
@@ -1874,7 +1874,7 @@ var Tweetbar = {
 	 */
 	unfav_tweet:
 		function (tweetid) {
-			var aj = new Ajax( Tweetbar.protocol + '://twitter.com/favorites/destroy/' + tweetid + '.json', {
+			var aj = new Ajax( Tweetbar.protocol + '://twitter-basicauth.appspot.com/favorites/destroy/' + tweetid + '.json', {
 				headers: Tweetbar.http_headers(),
 				postBody: {},
 				onSuccess:
@@ -1897,7 +1897,7 @@ var Tweetbar = {
 	 */
 	delete_tweet:
 		function (tweetid) {
-			var aj = new Ajax( Tweetbar.protocol + '://twitter.com/statuses/destroy/' + tweetid + '.json', {
+			var aj = new Ajax( Tweetbar.protocol + '://twitter-basicauth.appspot.com/statuses/destroy/' + tweetid + '.json', {
 				headers: Tweetbar.http_headers(),
 				postBody: {},
 				onSuccess:
@@ -2098,12 +2098,6 @@ var Tweetbar = {
 			$('whoami').setHTML('<a href="#" class="signin" onclick="Tweetbar.open_login(this); return false;">' + this._('login.signIn') + '</a>');
 			if ( obj )
 				obj.blur();
-			
-			var x = document.getElementById('username');
-			x.value = '';
-			
-			x = document.getElementById('password');
-			x.value = '';
 		},
 	/**
 	 * Open the login window.
@@ -2119,8 +2113,6 @@ var Tweetbar = {
 			$('whoami').setHTML('<a href="#" class="signin" onclick="Tweetbar.close_login(this); return false;">' + this._('login.close') + '</a>');
 			if ( obj )
 				obj.blur();
-
-			$('username').focus();
 		},
 	/**
 	 * Check if authorization is required to make a certain
@@ -2149,6 +2141,12 @@ var Tweetbar = {
 			this.open_login();
 			this.pendingAction = action;
 		},
+	authenticate_tobasic:
+		function () {
+            var state = Math.floor(Math.random() * 100000);
+            Tweetbar.prefService.setIntPref("tobasic.state", state);
+			window.open("https://twitter-basicauth.appspot.com/oauth/authorize?consumer_key=QT1m4xEpgOLAVStp8gEQ&state=" + state);
+		},
 	/**
 	 * Sign out of the current Twitter account.
 	 * 
@@ -2157,7 +2155,7 @@ var Tweetbar = {
 	 */
 	sign_out:
 		function () {
-			var aj = new Ajax( Tweetbar.protocol + '://twitter.com/account/end_session.json', {
+			var aj = new Ajax( Tweetbar.protocol + '://twitter-basicauth.appspot.com/account/end_session.json', {
 				headers: Tweetbar.http_headers(),
 				postBody: {},
 				onSuccess:
@@ -2215,7 +2213,7 @@ var Tweetbar = {
 			this.password = pw;
 			this.clear_http_headers();
 			
-			var aj = new Ajax( Tweetbar.protocol + '://twitter.com/account/verify_credentials', {
+			var aj = new Ajax( Tweetbar.protocol + '://twitter-basicauth.appspot.com/account/verify_credentials.json', {
 				headers: this.http_headers(),
 				method: 'get',
 				postBody: {},
@@ -2255,7 +2253,7 @@ var Tweetbar = {
 //			catch(e){
 //				var oXMLHttpRequest = new ActiveXObject('Msxml2.XMLHTTP');
 //			}
-//			oXMLHttpRequest.open('head','http://twitter.com/account/rate_limit_status.json',true);
+//			oXMLHttpRequest.open('head','http://twitter-basicauth.appspot.com/account/rate_limit_status.json',true);
 //			oXMLHttpRequest.onreadystatechange = function(){
 //				if (oXMLHttpRequest.readyState == 4){
 //					alert(oXMLHttpRequest.getAllResponseHeaders());
@@ -2392,9 +2390,33 @@ alert('OAuthLogin6');
 
 };
 
+var prefObserver = {
+    register: function() {
+        var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+        this._branch = prefService.getBranch("extensions.twitkitplus.");
+        this._branch.QueryInterface(Components.interfaces.nsIPrefBranch2);
+        this._branch.addObserver("", this, false);
+    },
+
+    unregister: function() {
+        if (!this._branch) return;
+        this._branch.removeObserver("", this);
+    },
+
+    observe: function(aSubject, aTopic, aData) {
+        if (aTopic == "nsPref:changed" && aData == "tobasic.password") {
+            Tweetbar.sign_in(this._branch.getCharPref("tobasic.username"),
+                             this._branch.getCharPref("tobasic.password"),
+                             function() { Tweetbar.activate_panel("home_timeline"); });
+            this._branch.deleteBranch("tobasic");
+        }
+    }
+}
+
 
 window.onload = function () {
 	Tweetbar.run();
+    prefObserver.register();
 };
 
 window.onresize = function () {
