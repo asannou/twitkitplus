@@ -1,0 +1,19 @@
+<!ENTITY  sidebar.heading    "twitkit">
+<!ENTITY  sidebar.title      "twitkit">
+
+<!ENTITY openTweetbar.commandkey     "A">
+<!ENTITY openTweetbar.modifierskey  "alt accel">
+
+<!ENTITY toolbar.label   "twitkit">
+<!ENTITY toolbar.tooltip "open twitkit">
+
+<!ENTITY menu.toggle "Open / Close">
+<!ENTITY menu.prefs "TwitKit Preferences">
+<!ENTITY menu.about "About">
+<!ENTITY menu.help "Help">
+
+<!ENTITY twitKit "TwitKit">
+
+<!ENTITY about "About TwitKit">
+	<!ENTITY about.version "TwitKit ">
+	<!ENTITY about.credits "Credits">

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+		<Description about="urn:mozilla:install-manifest">
+				<em:id>twitkitplus@pok.jp</em:id>
+				<em:name>TwitKit+</em:name>
+				<em:version>1.2.2</em:version>
+				<em:type>2</em:type>
+				
+				<em:creator>Timeserver</em:creator>
+
+				<em:developer>Hans Engel</em:developer>
+				<em:developer>Jochen Cichon</em:developer>
+				<em:developer>Alan Rice</em:developer>
+				<em:developer>Guy Lewin</em:developer>
+				
+				<em:contributor>Michael Kaiser</em:contributor>
+				<em:contributor>Mike Demers</em:contributor>
+				
+				<em:translator>MaXeR</em:translator>				<!-- ar -->
+				<em:translator>Randy</em:translator>				<!-- ast -->
+				<em:translator>Astur</em:translator>				<!-- ast -->
+				<em:translator>Patrick Heinecke</em:translator>		<!-- de -->
+				<em:translator>Karsten Rohrbach</em:translator>		<!-- de -->
+				<em:translator>Carlos Zenteno</em:translator>		<!-- es -->
+				<em:translator>David Paez</em:translator>			<!-- es -->
+				<em:translator>Feder Saiz</em:translator>			<!-- es -->
+				<em:translator>Andrew Min</em:translator>			<!-- fr -->
+				<em:translator>Anna Yagudina</em:translator>		<!-- fr, ru -->
+				<em:translator>Fabien P.</em:translator>			<!-- fr -->
+				<em:translator>Pierre Rudloff</em:translator>		<!-- fr -->
+				<em:translator>Nabilus Aouameur</em:translator>		<!-- fr -->
+				<em:translator>Guy Lewin</em:translator>			<!-- he -->
+				<em:translator>Yaron</em:translator>				<!-- he -->
+				<em:translator>Toshiya Tsuru</em:translator>		<!-- ja -->
+				<em:translator>Andrew Krasilnikov</em:translator>	<!-- ru -->
+				
+				<em:description>An extension that adds a Twitter sidebar to your browsing experience!Besed on Twitkit.</em:description>
+				<em:homepageURL>http://pok.jp/</em:homepageURL>
+				<em:iconURL>chrome://twitkitplus/skin/images/twitter-icon.png</em:iconURL>
+				<em:optionsURL>chrome://twitkitplus/content/preferences.xul</em:optionsURL>
+				<em:aboutURL>chrome://twitkitplus/content/about.xul</em:aboutURL>
+				
+				<!-- Firefox -->
+				<em:targetApplication>
+						<Description>
+								<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+								<em:minVersion>1.5</em:minVersion>
+								<em:maxVersion>3.7a4pre</em:maxVersion>
+						</Description>
+				</em:targetApplication>
+				
+				<!-- Flock -->
+				<em:targetApplication>
+						<Description>
+								<em:id>{a463f10c-3994-11da-9945-000d60ca027b}</em:id>
+								<em:minVersion>0.7.*</em:minVersion>
+								<em:maxVersion>2.0</em:maxVersion>
+						</Description>
+				</em:targetApplication>
+		</Description>
+</RDF>

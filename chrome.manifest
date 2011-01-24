@@ -1,0 +1,15 @@
+overlay chrome://browser/content/browser.xul chrome://twitkitplus/content/sidebar-overlay.xul
+style chrome://global/content/customizeToolbar.xul chrome://twitkitplus/skin/toolbar-button.css
+content twitkitplus chrome/content/
+skin twitkitplus classic/1.0 chrome/skin/
+
+locale twitkitplus ar	chrome/locale/ar/
+locale twitkitplus ast	chrome/locale/ast/
+locale twitkitplus de	chrome/locale/de/
+locale twitkitplus en-US chrome/locale/en-US/
+locale twitkitplus es	chrome/locale/es/
+locale twitkitplus fr	chrome/locale/fr/
+locale twitkitplus he	chrome/locale/he/
+locale twitkitplus it	chrome/locale/it/
+locale twitkitplus ja	chrome/locale/ja/
+locale twitkitplus ru	chrome/locale/ru/

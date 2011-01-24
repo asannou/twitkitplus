@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE prefwindow [
+	<!ENTITY % twitkitplusDTD SYSTEM "chrome://twitkitplus/locale/twitkitplus.dtd">
+	%twitkitplusDTD;
+	<!ENTITY % prefsDTD SYSTEM "chrome://twitkitplus/locale/preferences.dtd">
+	%prefsDTD;
+]>
+<prefwindow id="twitkitplusOptions" title="&prefs.title;"  
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  buttons="accept,cancel,help"
+  onload="sizeToContent;"
+  windowtype="TwitKitplus:Preferences"
+  persist="screenX screenY">
+		<prefpane id="TwitKitplusOptionsPane">
+				<preferences>
+						<preference id="extensions.twitkitplus.showAppSource" name="extensions.twitkitplus.showAppSource" type="bool"/>
+						<preference id="extensions.twitkitplus.refreshInterval" name="extensions.twitkitplus.refreshInterval" type="int"/>
+						<preference id="extensions.twitkitplus.showNamesAs" name="extensions.twitkitplus.showNamesAs" type="string"/>
+						<preference id="extensions.twitkitplus.colorScheme" name="extensions.twitkitplus.colorScheme" type="string"/>
+						<preference id="extensions.twitkitplus.shortenerService" name="extensions.twitkitplus.shortenerService" type="string"/>
+						<preference id="extensions.twitkitplus.fontSize" name="extensions.twitkitplus.fontSize" type="string"/>
+						<preference id="extensions.twitkitplus.secureConnection" name="extensions.twitkitplus.secureConnection" type="bool"/>
+						<preference id="extensions.twitkitplus.findText" name="extensions.twitkitplus.findText" type="string"/>
+				</preferences>
+   			<tabbox>
+   					<tabs>
+   							<tab label="&prefs.general;" />
+   							<tab label="&prefs.theme;" />
+   							<tab label="&prefs.connection;" />
+   							<tab label="findtext" />
+   					</tabs>
+   					<tabpanels>
+   							<tabpanel>
+										<grid>
+												<rows>
+			   										<row>
+    			   										<row>
+		    												<checkbox label="&prefs.general.showAppSource;" preference="extensions.twitkitplus.showAppSource"/>
+	    		   										</row>
+			   										</row>
+			   										<row>
+			   												<label flex="1">&prefs.general.refreshInterval;</label>
+			   												<menulist id="refreshInterval" preference="extensions.twitkitplus.refreshInterval">
+			   														<menupopup>
+																				<menuitem value="30000" label="&prefs.general.refreshInterval.30;"/>
+																				<menuitem value="60000" label="&prefs.general.refreshInterval.1;"/>
+																				<menuitem value="180000" label="&prefs.general.refreshInterval.3;"/>
+																				<menuitem value="300000" label="&prefs.general.refreshInterval.5;"/>
+																				<menuitem value="600000" label="&prefs.general.refreshInterval.10;"/>
+																		</menupopup>
+						   									</menulist>
+						   							</row>
+						   							<row>
+						   									<label flex="1">&prefs.general.showNamesAs;</label>
+						   									<menulist id="showNamesAs" preference="extensions.twitkitplus.showNamesAs">
+						   											<menupopup>
+						   													<menuitem value="screennames" label="&prefs.general.showNamesAs.screenNames;"/>
+						   													<menuitem value="fullnames" label="&prefs.general.showNamesAs.fullNames;"/>
+						   											</menupopup>
+						   									</menulist>
+													</row>
+													<row>
+															<label flex="1">&prefs.general.shortenerService;</label>
+															<menulist id="shortenerService" preference="extensions.twitkitplus.shortenerService">
+																	<menupopup>
+																			<menuitem value="bit.ly" label="&prefs.general.shortenerService.bitLy;"/>
+																			<menuitem value="is.gd" label="&prefs.general.shortenerService.isGd;"/>
+																			<menuitem value="tinyurl" label="&prefs.general.shortenerService.tinyUrl;"/>
+																			<menuitem value="tr.im" label="&prefs.general.shortenerService.trIm;"/>
+																			<menuitem value="xrl.us" label="&prefs.general.shortenerService.xrlUs;"/>
+																	</menupopup>
+															</menulist>
+													</row>
+						 			  		</rows>
+										</grid>
+								</tabpanel>
+								<tabpanel>
+										<grid>
+												<rows>
+														<row>
+																<label flex="1">&prefs.theme.colorScheme;</label>
+																<menulist id="colorScheme" preference="extensions.twitkitplus.colorScheme">
+																		<menupopup>
+																				<menuitem value="deepBrown" label="&prefs.theme.colorScheme.deepBrown;"/>
+																				<menuitem value="twitterBlue" label="&prefs.theme.colorScheme.twitterBlue;"/>
+																				<menuitem value="pastel" label="&prefs.theme.colorScheme.pastel;"/>
+																				<menuitem value="muted" label="&prefs.theme.colorScheme.muted;"/>
+																		</menupopup>
+																</menulist>
+														</row>
+														<row>
+																<label flex="1">&prefs.theme.fontSize;</label>
+																<textbox preference="extensions.twitkitplus.fontSize"></textbox>
+																<label flex="1">%</label>
+														</row>
+												</rows>
+										</grid>
+								</tabpanel>
+								<tabpanel>
+										<checkbox label="&prefs.connection.secureConnection;" preference="extensions.twitkitplus.secureConnection"/>
+								</tabpanel>
+								<tabpanel>
+										<grid>
+												<rows>
+										<row>
+											<label control="your-name" value="This box's text add to Listbox."/>
+										</row>
+										<row>
+											<textbox  multiline="true" rows="5" preference="extensions.twitkitplus.findText"/>
+										</row>
+												</rows>
+										</grid>
+								</tabpanel>
+						</tabpanels>
+				</tabbox>
+		</prefpane>
+</prefwindow>

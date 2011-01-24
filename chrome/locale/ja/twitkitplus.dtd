@@ -1,0 +1,19 @@
+<!ENTITY  sidebar.heading    "twitkit+">
+<!ENTITY  sidebar.title      "twitkit+">
+
+<!ENTITY openTweetbar.commandkey     "A">
+<!ENTITY openTweetbar.modifierskey  "alt accel">
+
+<!ENTITY toolbar.label   "twitkit+">
+<!ENTITY toolbar.tooltip "twitkit+を開く">
+
+<!ENTITY menu.toggle "開く / 閉じる">
+<!ENTITY menu.prefs "TwitKit+の設定">
+<!ENTITY menu.about "About">
+<!ENTITY menu.help "ヘルプ">
+
+<!ENTITY twitKitplus "TwitKit+">
+
+<!ENTITY about "TwitKit+について">
+	<!ENTITY about.version "TwitKit+ ">
+	<!ENTITY about.credits "クレジット">

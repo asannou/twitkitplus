@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE window [
+	<!ENTITY % twitkitplusDTD SYSTEM "chrome://twitkitplus/locale/twitkitplus.dtd">
+	%twitkitplusDTD;
+]>
+<window id="twitkit+About" title="&about;"  
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	windowtype="TwitKit+:About"
+	persist="screenX screenY">
+		<vbox>
+				<hbox>
+						<image src="chrome://twitkitplus/skin/images/logo.png" align="center" style="padding: 20px 70px;"/>
+				</hbox>
+				<hbox pack="center">
+						<label>&about.version; 1.2.2</label>
+				</hbox>
+				<hbox pack="center">
+						<label href="http://engel.uk.to/twitkit/wiki/Main/Credits" class="text-link">&about.credits;</label>
+				</hbox>
+				<hbox pack="center">
+						<label href="http://pok.jp/" class="text-link">TwitKit+ Website</label>
+				</hbox>
+		</vbox>
+</window>

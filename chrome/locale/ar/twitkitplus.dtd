@@ -1,0 +1,19 @@
+<!ENTITY  sidebar.heading    "ﾘｪﾙ異韓ｪﾙ・ｪ">
+<!ENTITY  sidebar.title      "ﾘｪﾙ異韓ｪﾙ・ｪ">
+
+<!ENTITY openTweetbar.commandkey     "A">
+<!ENTITY openTweetbar.modifierskey  "alt accel">
+
+<!ENTITY toolbar.label   "ﾘｪﾙ異韓ｪﾙ・ｪ">
+<!ENTITY toolbar.tooltip "ﾘ･ﾙ・ｪﾘｭ ﾘｪﾙ異韓ｪﾙ・ｪ">
+
+<!ENTITY menu.toggle "ﾙ・ｪﾘｭ / ﾘ･ﾘｺﾙ・ｧﾙ舀">
+<!ENTITY menu.prefs "ﾘ･ﾘｹﾘｯﾘｧﾘｯﾘｧﾘｪ ﾘｪﾙ異韓ｪﾙ・ｪ">
+<!ENTITY menu.about "ﾘｭﾙ異萀">
+<!ENTITY menu.help "ﾙ・ｳﾘｧﾘｹﾘｯﾘｩ">
+
+<!ENTITY twitKit "ﾘｪﾙ異韓ｪﾙ・ｪ">
+
+<!ENTITY about "ﾘｭﾙ異萀 ﾘｪﾙ異韓ｪﾙ・ｪ">
+	<!ENTITY about.version "ﾘｪﾙ異韓ｪﾙ・ｪ ">
+	<!ENTITY about.credits "ﾘｧﾙ・・ｳﾘｧﾙ・・異蘀">

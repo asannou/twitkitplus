@@ -1,0 +1,19 @@
+<!ENTITY  sidebar.heading    "twitkit">
+<!ENTITY  sidebar.title      "twitkit">
+
+<!ENTITY openTweetbar.commandkey     "A">
+<!ENTITY openTweetbar.modifierskey  "alt accel">
+
+<!ENTITY toolbar.label   "twitkit">
+<!ENTITY toolbar.tooltip "ﾗ､ﾗｪﾗ需 ﾗ碩ｪ twitkit">
+
+<!ENTITY menu.toggle "ﾗ､ﾗｪﾗ需 / ﾗ｡ﾗ潰勉ｨ">
+<!ENTITY menu.prefs "ﾗ蕃｢ﾗ沌､ﾗ勉ｪ TwitKit">
+<!ENTITY menu.about "ﾗ碩勉沌勉ｪ">
+<!ENTITY menu.help "ﾗ｢ﾗ儲ｨﾗ鐀">
+
+<!ENTITY twitKit "TwitKit">
+
+<!ENTITY about "ﾗ槞燮沌｢ ﾗ｢ﾗ鰀 TwitKit">
+	<!ENTITY about.version "TwitKit+ ">
+	<!ENTITY about.credits "ﾗｪﾗ勉沌勉ｪ">
